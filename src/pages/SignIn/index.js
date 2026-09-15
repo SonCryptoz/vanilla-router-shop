@@ -1,3 +1,5 @@
+import Link from "../../components/Link";
+
 const SigInPage = () => {
     return `
         <div class="flex w-full items-center justify-center py-8">
