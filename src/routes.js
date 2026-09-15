@@ -4,7 +4,7 @@ import CartPage from "./pages/Cart";
 import HomePage from "./pages/Home";
 import ProductPage from "./pages/Product";
 import ProductDetailsPage from "./pages/ProductDetails";
-import SigInPage from "./pages/Signin";
+import SigInPage from "./pages/SignIn";
 import SignUpPage from "./pages/SignUp";
 
 export const routes = [
