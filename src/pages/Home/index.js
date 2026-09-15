@@ -1,4 +1,4 @@
-import formatPrice from "../../../../react-router-shop/src/utils/formatPrice";
+import formatPrice from "../../utils/formatPrice";
 import Link from "../../components/Link";
 
 const categories = [
