@@ -10,6 +10,10 @@ class Router {
             this.render();
         });
 
+        window.addEventListener("hashchange", () => {
+            this.render();
+        });
+
         // Xử lý click không load lại trang như Link
         document.addEventListener("click", (e) => {
             const link = e.target.closest("[data-link]");
@@ -26,8 +30,15 @@ class Router {
     }
 
     navigate(path) {
-        // thay đổi đường dẫn không load lại trang
-        history.pushState({}, "", path);
+        const nextHash = path.startsWith("#") ? path : `#${path}`;
+
+        if (location.hash === nextHash) {
+            this.render();
+            return;
+        }
+
+        // Đổi hash không làm GitHub Pages request route mới.
+        location.hash = nextHash.slice(1);
 
         // Scroll to top
         window.scrollTo(0, 0);
@@ -37,10 +48,7 @@ class Router {
     }
 
     render() {
-        const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
-        const path = location.pathname.startsWith(basePath)
-            ? location.pathname.slice(basePath.length) || "/"
-            : location.pathname; // lấy path không gồm base của GitHub Pages
+        const path = decodeURIComponent(location.hash.slice(1) || "/");
 
         const root = document.querySelector("#app");
 

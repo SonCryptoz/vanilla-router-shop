@@ -1,14 +1,10 @@
 const Link = ({ to, children, className = "", active = false }) => {
-        const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
-        const currentPath = location.pathname.startsWith(basePath)
-            ? location.pathname.slice(basePath.length) || "/"
-            : location.pathname;
+    const currentPath = decodeURIComponent(location.hash.slice(1) || "/");
     const isActive =
         active &&
         (to === "/"
-                ? currentPath === "/"
-                : currentPath === to || currentPath.startsWith(`${to}/`));
-        const href = `${basePath}${to === "/" ? "/" : to}`;
+        ? currentPath === "/"
+        : currentPath === to || currentPath.startsWith(`${to}/`));
 
     const activeClass = `relative transition-all duration-200 ${
         isActive
@@ -18,7 +14,7 @@ const Link = ({ to, children, className = "", active = false }) => {
     const classes = `${activeClass} ${className}`.trim();
 
     return `
-        <a href="${href}" class="${classes}" data-link${
+        <a href="#${to}" class="${classes}" data-link${
             isActive ? ' aria-current="page"' : ""
         }>
             ${children}
